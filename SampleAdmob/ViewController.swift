@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         request.testDevices = [kGADSimulatorID]
        
         footerBanner.load(request)
-        footerBanner.isHidden = true
+        //footerBanner.isHidden = true
         
         
         // Native Express Add
@@ -61,8 +61,15 @@ extension ViewController: GADBannerViewDelegate {
     /// Tells the delegate an ad request loaded an ad.
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
         print("adViewDidReceiveAd")
-        footerBanner.isHidden = false
+        
+        
+        //footerBanner.isHidden = false
+        
+        footerBanner.transform = CGAffineTransform.init(translationX:0, y: self.view.frame.size.height+footerBanner.frame.size.height)
         //bannerView.isHidden = false
+        UIView.animate(withDuration: 0.5, delay: 0, options:.curveEaseIn , animations: {
+            self.footerBanner.transform = .identity
+        }, completion:nil)
     }
     
     /// Tells the delegate an ad request failed.
